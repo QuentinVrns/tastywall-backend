@@ -1,0 +1,100 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+.env.*
+!.env.example
+!.env.production
+
+# Firebase credentials
+firebase-adminsdk*.json
+serviceAccountKey.json
+service-account.json
+*-firebase-adminsdk-*.json
+
+# Security & Credentials
+*.pem
+*.key
+*.cert
+*.p12
+.secrets/
+secrets.json
+credentials.json
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+/prisma/migrations/*/migration.sql
+!/prisma/migrations/migration_lock.toml
+
+# temp directory
+.temp
+.tmp
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Prisma
+/generated/prisma
+node_modules/.prisma
+
+# Lock files (optionnel - décommentez si vous ne voulez pas les versionner)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# PM2 logs
+logs/
+*.log
+pm2-*.log
+.pm2/
+
+# Deployment
+deploy-config.json

@@ -1,0 +1,59 @@
+# ========================================
+# Configuration Apache pour o2switch
+# Reverse proxy vers l'application Node.js
+# ========================================
+
+# Active le moteur de réécriture
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Empêcher l'accès aux fichiers sensibles
+  RewriteRule ^\.env - [F,L]
+  RewriteRule ^\.env\.* - [F,L]
+  RewriteRule ^ecosystem\.config\.js - [F,L]
+
+  # Proxy vers l'application Node.js sur le port 3000
+  # Si Apache n'arrive pas à se connecter, vérifiez que votre app Node.js tourne
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
+</IfModule>
+
+# Activer CORS si nécessaire (en backup de la config NestJS)
+<IfModule mod_headers.c>
+  # Ces headers sont normalement gérés par NestJS
+  # Décommentez si vous avez des problèmes CORS
+  # Header set Access-Control-Allow-Origin "*"
+  # Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+  # Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Configuration de sécurité
+<IfModule mod_headers.c>
+  # Protection contre le clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Protection XSS
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Empêcher le MIME sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # HSTS pour forcer HTTPS (décommentez quand le SSL est actif)
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Désactiver le listing des répertoires
+Options -Indexes
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(env|log|sh|json|md)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Autoriser l'accès aux assets si nécessaire
+<FilesMatch "\.(jpg|jpeg|png|gif|svg|css|js|ico|woff|woff2|ttf|eot)$">
+  Order allow,deny
+  Allow from all
+</FilesMatch>

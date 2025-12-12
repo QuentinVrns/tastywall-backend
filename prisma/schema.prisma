@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String       @id @default(uuid())
+  firebaseUid String       @unique
+  email       String       @unique
+  name        String?
+  age         Int?
+  photoUrl    String?
+
+  foodProfile FoodProfile?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model FoodProfile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  diets         String[]
+  allergies     String[]
+  intolerances  String[]
+  likes         String[]
+  dislikes      String[]
+  bannedFoods   String[]
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
