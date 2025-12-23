@@ -1,7 +1,7 @@
 import {
   Controller,
   Get,
-  Patch,
+  Post,
   Body,
   UseGuards,
   Request,
@@ -20,7 +20,7 @@ export class FoodProfileController {
     return await this.foodProfileService.getFoodProfile(uid);
   }
 
-  @Patch()
+  @Post()
   async updateFoodProfile(
     @Request() req,
     @Body()

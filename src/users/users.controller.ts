@@ -2,7 +2,7 @@ import {
   Controller,
   Post,
   Get,
-  Patch,
+  Post,
   Body,
   UseGuards,
   Request,
@@ -27,7 +27,7 @@ export class UsersController {
     return await this.usersService.getUserByFirebaseUid(uid);
   }
 
-  @Patch('update')
+  @Post('update')
   async updateUser(
     @Request() req,
     @Body() body: { name?: string; age?: number; photoUrl?: string },
